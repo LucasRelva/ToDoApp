@@ -1,0 +1,21 @@
+{
+  "name": "brightcities",
+  "version": "1.0.0",
+  "repository": "https://github.com/LucasRelva/ToDoApp.git",
+  "author": "Lucas Relva",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon app/core/config/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0"
+  }
+}
