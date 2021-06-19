@@ -6,13 +6,14 @@
     <title>VanillaJS • TodoMVC</title>
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <section class="todoapp">
         <header class="header">
             <h1>todos</h1>
-            <input class="new-todo" placeholder="What needs to be done?" autofocus>
+            <input id="taskInput" class="new-todo" placeholder="What needs to be done?" autofocus>
         </header>
         <section class="main">
             <input id="toggle-all" class="toggle-all" type="checkbox">
@@ -23,13 +24,13 @@
             <span class="todo-count"></span>
             <ul class="filters">
                 <li>
-                    <a href="#/" class="selected">All</a>
+                    <a href="/" class="selected">All</a>
                 </li>
                 <li>
-                    <a href="#/active">Active</a>
+                    <a href="/active">Active</a>
                 </li>
                 <li>
-                    <a href="#/completed">Completed</a>
+                    <a href="/completed">Completed</a>
                 </li>
             </ul>
             <button class="clear-completed">Clear completed</button>
@@ -40,6 +41,7 @@
 
     </footer>
 
+    <script src="./js/requests.js"></script>
 </body>
 
 </html>
