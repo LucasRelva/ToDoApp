@@ -4,6 +4,8 @@ module.exports = {
     async listAll(req, res) {
         const tasks = await Task.findAll()
 
+        if (!tasks) return res.satatus(204).json({ error: 'No tasks' })
+
         return res.json(tasks)
     },
 
@@ -15,6 +17,8 @@ module.exports = {
             }
         })
 
+        if (!rows) return res.satatus(204).json({ error: 'No active tasks' })
+
         return res.json({ "count": count, "rows": rows })
     },
 
@@ -25,6 +29,8 @@ module.exports = {
                 isActive: false
             }
         })
+
+        if (!completedTasks) return res.satatus(204).json({ error: 'No completed tasks' })
 
         return res.json(completedTasks)
     },
@@ -51,6 +57,8 @@ module.exports = {
                 isActive: false
             }
         })
+
+        if (tasks == 0) return res.satatus(304).json({ error: 'No task was deleted' })
 
         return res.json(tasks)
     },
@@ -96,9 +104,9 @@ module.exports = {
     async addTask(req, res) {
         const { name } = req.body
 
-        console.log(Task.schema)
-
         const task = await Task.create({ name, isActive: true })
+
+        if (!task) return res.satatus(500).json({ error: 'Task was not created properly' })
 
         return res.json(task)
     },
