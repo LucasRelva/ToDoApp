@@ -5,10 +5,13 @@
  
 
 # Tech
-  - HTML, JS
-  - Node;
+  - HTML
+  - CSS
+  - Express
+  - JS
+  - NodeJS
   - Sequelize
-  - MySQL;
+  - MySQL
 
 # Dependências e suas versões
 
