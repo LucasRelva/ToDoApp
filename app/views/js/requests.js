@@ -3,7 +3,6 @@ let list = document.querySelector('.todo-list')
 let filters = document.querySelector('.filters')
 let clearButton = document.querySelector('.clear-completed')
 let taskCount = document.querySelector('.todo-count')
-let body
 
 function checkCompleted() {
     axios.get('/task/check').then((res) => {
