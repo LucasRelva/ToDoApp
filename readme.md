@@ -1,7 +1,8 @@
 
-> App para organização de tarefas -- HTML e CSS copiados do app: https://todomvc.com/
-> RESTful API, Back-end e JS no client-side originais. AUTHOR: Lucas Relva
-> APP feito para o desafio técnico da empresa Bright Cities
+ > APP feito para o desafio técnico da empresa Bright Cities
+- App para organização de tarefas -- HTML e CSS copiados do app: https://todomvc.com/ 
+- RESTful API, Back-end e JS no client-side originais. AUTHOR: Lucas Relva
+ 
 
 # Tech
   - HTML, JS
