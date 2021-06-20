@@ -15,7 +15,7 @@
 
 # Dependências e suas versões
 
-  - NodeJs : 10.19.0
+  - NodeJs : 14.17.1
   - Express: ^4.17.1
   - Mysql2: ^2.2.5
   - Sequelize: ^6.6.2
