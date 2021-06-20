@@ -16,7 +16,7 @@
             <input id="taskInput" class="new-todo" placeholder="What needs to be done?" autofocus>
         </header>
         <section class="main">
-            <input id="toggle-all" class="toggle-all" type="checkbox">
+            <input id="toggle-all" class="toggle-all" type="checkbox" onclick="updateAll()">
             <label for="toggle-all">Mark all as complete</label>
             <ul class="todo-list"></ul>
         </section>
@@ -33,7 +33,7 @@
                     <a href="/completed">Completed</a>
                 </li>
             </ul>
-            <button class="clear-completed">Clear completed</button>
+            <button onclick="clearCompletedTasks()" class="clear-completed">Clear completed</button>
         </footer>
     </section>
     <footer class="info">
