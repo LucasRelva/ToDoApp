@@ -131,28 +131,30 @@ function updateName(id, name) {
 
     nameInput.addEventListener('keyup', (event) => {
         if (event.keyCode == 13) {
-            const taskName = event.target.value
+            const taskName = event.target.value.trim()
 
-            axios.put('/task/name/' + id, {
-                name: taskName
-            }).then(() => {
-                if (window.location.pathname == '/active/') {
-                    getCount()
-                    loadActiveTasks()
-                    checkCompleted()
-                }
-                else if (window.location.pathname == '/completed/') {
-                    getCount()
-                    loadCompletedTasks()
-                    checkCompleted()
-                } else {
-                    loadTasks()
-                    checkCompleted()
-                }
+            if (taskName) {
+                axios.put('/task/name/' + id, {
+                    name: taskName
+                }).then(() => {
+                    if (window.location.pathname == '/active/') {
+                        getCount()
+                        loadActiveTasks()
+                        checkCompleted()
+                    }
+                    else if (window.location.pathname == '/completed/') {
+                        getCount()
+                        loadCompletedTasks()
+                        checkCompleted()
+                    } else {
+                        loadTasks()
+                        checkCompleted()
+                    }
 
-            }).catch(err => {
-                console.log('Error when updating task name!' + err)
-            })
+                }).catch(err => {
+                    console.log('Error when updating task name!' + err)
+                })
+            }
         }
     })
 
@@ -206,29 +208,32 @@ function updateTask(id) {
 
 input.addEventListener('keyup', (event) => {
     if (event.keyCode == 13) {
-        const taskName = event.target.value
+        const taskName = event.target.value.trim()
 
-        axios.post('/task', {
-            name: taskName
-        }).then(() => {
-            if (window.location.pathname == '/active/') {
-                getCount()
-                loadActiveTasks()
-                checkCompleted()
-            }
-            else if (window.location.pathname == '/completed/') {
-                getCount()
-                loadCompletedTasks()
-                checkCompleted()
-            } else {
-                loadTasks()
-                checkCompleted()
-            }
 
-            input.value = ''
-        }).catch(err => {
-            console.log('Error when posting task into the db!' + err)
-        })
+        if (taskName) {
+            axios.post('/task', {
+                name: taskName
+            }).then(() => {
+                if (window.location.pathname == '/active/') {
+                    getCount()
+                    loadActiveTasks()
+                    checkCompleted()
+                }
+                else if (window.location.pathname == '/completed/') {
+                    getCount()
+                    loadCompletedTasks()
+                    checkCompleted()
+                } else {
+                    loadTasks()
+                    checkCompleted()
+                }
+
+                input.value = ''
+            }).catch(err => {
+                console.log('Error when posting task into the db!' + err)
+            })
+        }
     }
 })
 
