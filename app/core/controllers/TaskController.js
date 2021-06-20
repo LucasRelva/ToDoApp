@@ -1,10 +1,11 @@
+const { findByPk } = require('../models/Task')
 const Task = require('../models/Task')
 
 module.exports = {
     async listAll(req, res) {
         const tasks = await Task.findAll()
 
-        if (!tasks) return res.satatus(204).json({ error: 'No tasks' })
+        if (!tasks) return res.status(204).json({ error: 'No tasks' })
 
         return res.json(tasks)
     },
@@ -17,7 +18,7 @@ module.exports = {
             }
         })
 
-        if (!rows) return res.satatus(204).json({ error: 'No active tasks' })
+        if (!rows) return res.status(204).json({ error: 'No active tasks' })
 
         return res.json({ "count": count, "rows": rows })
     },
@@ -30,7 +31,7 @@ module.exports = {
             }
         })
 
-        if (!completedTasks) return res.satatus(204).json({ error: 'No completed tasks' })
+        if (!completedTasks) return res.status(204).json({ error: 'No completed tasks' })
 
         return res.json(completedTasks)
     },
@@ -40,7 +41,7 @@ module.exports = {
 
         const task = await Task.findByPk(taskId)
 
-        if (!task) return res.satatus(204).json({ error: 'No task was found with the id: ' + taskId })
+        if (!task) return res.status(204).json({ error: 'No task was found with the id: ' + taskId })
 
         await Task.destroy({
             where: {
@@ -58,7 +59,7 @@ module.exports = {
             }
         })
 
-        if (tasks == 0) return res.satatus(304).json({ error: 'No task was deleted' })
+        if (tasks == 0) return res.status(304).json({ error: 'No task was deleted' })
 
         return res.json(tasks)
     },
@@ -68,7 +69,7 @@ module.exports = {
 
         const task = await Task.findByPk(taskId)
 
-        if (!task) return res.satatus(204).json({ error: 'No task was found with the id: ' + taskId })
+        if (!task) return res.status(204).json({ error: 'No task was found with the id: ' + taskId })
 
         task.isActive == true ? await Task.update({ isActive: false }, { where: { id: taskId } }) :
             await Task.update({ isActive: true }, { where: { id: taskId } })
@@ -77,26 +78,25 @@ module.exports = {
     },
 
     async updateAll(req, res) {
-        const tasks = await Task.findAll({
+        const tasks = await Task.findOne({
             where: {
                 isActive: true
             }
         })
 
-        if (!tasks) {
+        if (tasks == null) {
             await Task.update({ isActive: true }, {
                 where: {
                     isActive: false
                 }
             })
-            return
+        } else {
+            await Task.update({ isActive: false }, {
+                where: {
+                    isActive: true
+                }
+            })
         }
-
-        await Task.update({ isActive: false }, {
-            where: {
-                isActive: true
-            }
-        })
 
         return res.json(tasks)
     },
@@ -106,12 +106,38 @@ module.exports = {
 
         const task = await Task.create({ name, isActive: true })
 
-        if (!task) return res.satatus(500).json({ error: 'Task was not created properly' })
+        if (!task) return res.status(500).json({ error: 'Task was not created properly' })
 
         return res.json(task)
     },
 
-    //----------------- TODO --------------------
-    // async updateName(){  }
+    async checkCompleted(req, res) {
+        const task = await Task.findOne({
+            where: {
+                isActive: false
+            }
+        })
 
+        if (task) {
+            return res.json({ check: true })
+        }
+        return res.json({ check: false })
+    },
+
+    async updateName(req, res) {
+        const { taskId } = req.params
+        const { name } = req.body
+
+        const task = await Task.findByPk(taskId)
+
+        if (!task) return res.status(204).json({ error: 'No task was found with the id: ' + taskId })
+
+        await Task.update({ name: name }, {
+            where: {
+                id: taskId
+            }
+        })
+
+        return res.json(task)
+    }
 }
